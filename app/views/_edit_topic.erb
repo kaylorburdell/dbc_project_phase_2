@@ -1,6 +1,10 @@
 <div class="edit_topic_form">
   <form action="/topic/<%= topic.id %>" method="POST">
     <input type="hidden" name="_method" value="PUT">
-    <%= erb :'topic/_form_inputs', locals: {topic: topic} %>
+    Title:<br>
+    <input name="topic[name]" type="text"><br>
+    Content:<br>
+    <textarea name="topic[content]"></textarea><br>
+    <input type="submit" value="FIXATHREAD">
   </form>
 </div>

@@ -49,20 +49,23 @@ delete '/topic/:id', auth: :user do |id|
 end
 
 get '/topic/:id/edit', auth: :user do |id|
+  @topic = Topic.find(params[:id])
   redirect to '/' unless current_user.may_edit(@topic)
-  erb :'topic/_edit_topic', locals: {topic: @topic}
+  erb :'_edit_topic', locals: {topic: @topic}
 end
 
 put '/topic/:id', auth: :user do |id|
+  @topic = Topic.find(params[:id])
   if current_user.may_edit(@topic)
     @topic.update(params[:topic])
+    erb :'topic'
   else
     set_error("Meek Mill - Levels")
   end
 
-  if request.xhr?
-    return {topic_text: @topic.text}.to_json
-  else
-    redirect to("/topic/#{id}")
-  end
+  # if request.xhr?
+  #   return {topic_text: @topic.text}.to_json
+  # else
+  #   redirect to("/topic/#{id}")
+  # end
 end
