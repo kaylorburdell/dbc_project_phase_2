@@ -1,3 +1,4 @@
 class Forum < ActiveRecord::Base
-  # Remember to create a migration!
+  validates :name, presence: true
+  has_many  :topics, :dependent => :destroy
 end

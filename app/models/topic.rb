@@ -1,3 +1,6 @@
 class Topic < ActiveRecord::Base
-  # Remember to create a migration!
+  validates  :name, presence: true
+  validates  :content, presence: true
+  belongs_to :forum
+  has_many   :posts, :dependent => :destroy
 end
