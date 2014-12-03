@@ -10,5 +10,9 @@ class User < ActiveRecord::Base
   validates :password, presence: true
   has_many  :posts
   has_many  :topics
+  has_many  :points
+  def may_edit(item)
+    self.is_admin || item.user.id == self.id
+  end
   has_secure_password
 end

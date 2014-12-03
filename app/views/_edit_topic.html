@@ -1,0 +1,6 @@
+<div class="edit_topic_form">
+  <form action="/topic/<%= topic.id %>" method="POST">
+    <input type="hidden" name="_method" value="PUT">
+    <%= erb :'topic/_form_inputs', locals: {topic: topic} %>
+  </form>
+</div>

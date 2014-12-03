@@ -34,3 +34,32 @@ post '/topic' do
     redirect("/topic/new")
   end
 end
+
+delete '/topic/:id', auth: :user do |id|
+  @topic.destroy
+
+  if request.xhr?
+    return {deleted: true}.to_json
+  else
+    redirect to('/topics')
+  end
+end
+
+get '/topic/:id/edit', auth: :user do |id|
+  redirect to '/subs' unless current_user.may_edit(@topic)
+  erb :'topic/_update_form', locals: {topic: @topic}
+end
+
+put '/topic/:id', auth: :user do |id|
+  if current_user.may_edit(@topic)
+    @topic.update(params[:topic])
+  else
+    set_error("Meek Mill - Levels")
+  end
+
+  if request.xhr?
+    return {topic_text: @topic.text}.to_json
+  else
+    redirect to("/topic/#{id}")
+  end
+end

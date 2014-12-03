@@ -1,9 +1,9 @@
 get '/login' do
-  erb :login
+  erb :'auth/login'
 end
 
 get '/signup' do
-  erb :signup
+  erb :'auth/signup'
 end
 
 post '/login' do
