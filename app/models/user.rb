@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
             :presence => {:message => "Enter your email address!" },
             :format => {:with => VALID_EMAIL_REGEX, :message => "Enter a valid Email address !"},
             :uniqueness => {:case_sensitive => false, :message => "Email already exists!"}
+  validates :alias,
+            :presence => {:message => "Enter your desired alias!" },
+            :uniqueness => {:case_sensitive => false, :message => "Alias already exists!"}
   validates :password, presence: true
   has_many  :posts
   has_many  :topics
