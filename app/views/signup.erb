@@ -1,0 +1,19 @@
+<div class="container">
+<h1>welcome new UsER</h1>
+<p>
+    <% if current_user %>
+        <a href="/logout">logout</a>
+      <% else %>
+        <form action="/signup/" method="POST"><br>
+          email<br>
+          <input name="user[email]"></input><br>
+          password<br>
+          <input name="user[password]"></input><br>
+          confirm<br>
+          <input name="user[password_confirmation]"></input><br>
+          <input type="submit" value="submit">
+          <!-- ADD AJAX STATUS SUBMITTING BUTTON -->
+        </form>
+      <% end %>
+      <a href = "/">back home</a>
+</p>
