@@ -19,6 +19,7 @@
 </head>
 <body>
   <p><% if current_user %>
+    welcome back <%=current_user.alias %><br>
       <a href="topic/new">make a post</a><br>
         <a href="/logout">logout</a><br>
       <% else %>

@@ -1,0 +1,6 @@
+  <form action="/post/<%= post.id %>" method="POST">
+    <input type="hidden" name="_method" value="PUT">
+    Content:<br>
+    <textarea name="post[content]"></textarea><br>
+    <input type="submit" value="FIXAPOST">
+  </form>
