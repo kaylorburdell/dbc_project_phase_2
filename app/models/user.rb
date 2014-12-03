@@ -11,8 +11,10 @@ class User < ActiveRecord::Base
   has_many  :posts
   has_many  :topics
   has_many  :points
+  has_secure_password
+
   def may_edit(item)
     self.is_admin || item.user.id == self.id
   end
-  has_secure_password
+
 end

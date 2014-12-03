@@ -15,20 +15,23 @@ get '/topic/new' do
   end
 end
 
-get '/topics/:id' do
+# get '/topics/:id' do |id|
+#   erb :'/topic', locals: {topic: @topic}
+# end
+
+get '/topic/:id' do
   @topic = Topic.find(params[:id])
-  # @tags = @topic.tags
   erb :topic
 end
 
-post '/topic' do
+post '/topic', auth: :user do
   # puts '*' * 300
   # puts params
-  topic = Topic.new(params[:topic])
-  # tag = Tag.new(params[:tag])
-  # topic.tags << tag
-  if topic.save
-    redirect("/topics/#{topic.id}")
+  params[:topic][:user_id] = current_user.id
+  @topic = Topic.create(params[:topic])
+  if @topic.save
+    redirect("/topic/#{@topic.id}")
+    # erb :'/topic', locals: {topic: @topic}
   else
     session[:error] = topic.errors.messages
     redirect("/topic/new")
@@ -46,8 +49,8 @@ delete '/topic/:id', auth: :user do |id|
 end
 
 get '/topic/:id/edit', auth: :user do |id|
-  redirect to '/subs' unless current_user.may_edit(@topic)
-  erb :'topic/_update_form', locals: {topic: @topic}
+  redirect to '/' unless current_user.may_edit(@topic)
+  erb :'topic/_edit_topic', locals: {topic: @topic}
 end
 
 put '/topic/:id', auth: :user do |id|
