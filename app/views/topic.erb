@@ -5,8 +5,12 @@
     <p><%= @topic.content %></p>
 
     <% if user_can_edit? @topic %>
-
       <%= erb :'_edit_topic', locals: {topic: @topic} %>
-
     <% end %>
+
+    <% if current_user %>
+      <%= erb :'new_post', locals: {topic: @post} %>
+    <% end %>
+
+
 </div>

@@ -24,6 +24,16 @@ get '/topic/:id' do
   erb :topic
 end
 
+post '/topic/:id' do
+  @topic = Topic.find(params[:id])
+  @post = Post.new
+  @post.content = params[:post][:content]
+  @post.user = current_user
+  @post.topic_id = @topic.id
+  @post.save
+
+end
+
 post '/topic', auth: :user do
   # puts '*' * 300
   # puts params
@@ -35,6 +45,44 @@ post '/topic', auth: :user do
   else
     session[:error] = topic.errors.messages
     redirect("/topic/new")
+  end
+end
+
+get '/post/:id' do
+  @post = Post.find(params[:id])
+  erb :display_post
+end
+
+put '/post' do
+  redirect("/topic/#{@topic.id}")
+end
+
+put '/post/:id' do |id|
+  wiki = Wiki.find(id)
+  if wiki.update(params[:wiki])
+    wiki.create_revision(params[:revision][:content], current_user)
+    redirect("/wiki/#{wiki.id}")
+  else
+    session[:error] = wiki.errors.messages
+    redirect("/wiki/#{wiki.id}/edit")
+  end
+end
+
+post '/post' do
+  if current_user
+    @topic = Topic.find(params[:id])
+    params[:post][:user_id] = current_user.id
+    params[:post][:parent_id] = @topic.id
+  @post = Post.create(params[:post])
+    if @post.save
+      # ALL THIS IS MESSED UP
+      redirect("/topic/#{@topic.id}")
+      # erb :'/topic', locals: {topic: @topic}
+    else
+      session[:error] = post.errors.messages
+      redirect("../")
+    end
+  else
   end
 end
 

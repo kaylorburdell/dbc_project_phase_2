@@ -1,6 +1,8 @@
 class CreateForums < ActiveRecord::Migration
   def change
-    t.string :name
-    t.timestamps
+    create_table :forums do |t|
+      t.string     :name
+      t.timestamps
+    end
   end
 end
