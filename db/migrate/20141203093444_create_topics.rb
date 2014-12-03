@@ -1,8 +1,9 @@
 class CreateTopics < ActiveRecord::Migration
   def change
     create_table :topics do |t|
-      t.string   :email
-      t.string   :password_digest
+      t.string   :name
+      t.text     :content
+      t.timestamps
     end
   end
 end
