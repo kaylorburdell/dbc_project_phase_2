@@ -1,5 +1,12 @@
 <div class="container">
     <br><h2><%= @topic.name %></h2>
+    <h3>by: <%= @topic.user.alias %></h3>
 
     <p><%= @topic.content %></p>
+
+    <% if user_can_edit? @topic %>
+
+      <%= erb :'_edit_topic', locals: {topic: @topic} %>
+
+  <% end %>
 </div>
