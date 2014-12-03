@@ -7,15 +7,6 @@ get '/' do
   erb :index
 end
 
-get '/login/' do
-  erb :login
-end
-
-get '/logout/' do
-  session.clear
-  redirect ("/")
-end
-
 get '/topic/new' do
   if current_user
     erb :new_topic

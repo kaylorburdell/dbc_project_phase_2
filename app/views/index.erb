@@ -4,17 +4,17 @@
   <!-- MAKE SEARCH USE THAT WHATEVER WORD BREAKER UPPER THING U WERE GONNA USE ITLL BE SLOW BUT WHATEVER -->
    <form action="/search" method="get">
     <input type="text" name="query"/><br />
-    <%= display_error %><br>
+    <br>
     <input type="submit" />
   </form>
 
 </div>
 <p><% if current_user %>
       <a href="topic/new">make a post</a><br>
-        <a href="/logout/">logout</a><br>
+        <a href="/logout">logout</a><br>
       <% else %>
-        <a href="/signup/">signup</a> or
-        <a href="/login/">login</a> if you already have an account
+        <a href="/signup">signup</a> or
+        <a href="/login">login</a> if you already have an account
       <% end %>
   </p>
 

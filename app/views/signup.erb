@@ -4,7 +4,8 @@
     <% if current_user %>
         <a href="/logout">logout</a>
       <% else %>
-        <form action="/signup/" method="POST"><br>
+      <%= display_error %>
+        <form action="/signup" method="POST"><br>
           alias<br>
           <input name="user[alias]"></input><br>
           email<br>
