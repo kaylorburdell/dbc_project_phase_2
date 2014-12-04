@@ -73,8 +73,8 @@ delete '/topic/:id', auth: :user do |id|
   @topic = Topic.find(params[:id])
   @topic.destroy
   if request.xhr?
-    return {deleted: true}.to_json
-
+    p 'rkelly'
+    redirect("/")
   else
     redirect('/')
   end

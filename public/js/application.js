@@ -10,7 +10,7 @@ $(document).ready(function() {
       url: action,
       type: "DELETE"
     }).done(function() {
-      $target.parents('.topic').remove();
+      window.location = "/";
     });
   });
 });
