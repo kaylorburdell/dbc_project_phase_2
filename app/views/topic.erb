@@ -1,16 +1,19 @@
-<div class="container">
-    <br><h2><%= @topic.name %></h2>
-    <h3>by: <%= @topic.user.alias %></h3>
-
-    <p><%= @topic.content %></p>
-
+<div class="container-login">
+  <span id="absolute-center">
+    <br><h1><%= @topic.name %></h1>
+    <h5>by: <%= @topic.user.alias %></h5>
+    <h2><%= @topic.content %></h2>
     <% if user_can_edit? @topic %>
       <%= erb :'_edit_topic', locals: {topic: @topic} %>
+      <%= erb :'_delete_topic', locals: {topic: @topic} %>
     <% end %>
 
     <% if current_user %>
       <%= erb :'new_post', locals: {topic: @post} %>
     <% end %>
 
-
+    <% @posts.each do |post| %>
+      <%= erb :'display_post', locals: {post: post} %>
+    <% end %>
+  </span>
 </div>

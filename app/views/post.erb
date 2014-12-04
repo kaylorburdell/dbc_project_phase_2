@@ -1,3 +1,4 @@
+   <span id="absolute-center">
    <h3>by: <%= @post.user.alias %></h3>
 
       <p><%= @post.content %></p>
@@ -7,3 +8,4 @@
         <%= erb :'_edit_post', locals: {topic: @post} %>
 
       <% end %>
+  </span>

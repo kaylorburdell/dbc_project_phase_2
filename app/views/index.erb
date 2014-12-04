@@ -1,16 +1,8 @@
-<div class="container">
-
-<div class="search">
-  <!-- MAKE SEARCH USE THAT WHATEVER WORD BREAKER UPPER THING U WERE GONNA USE ITLL BE SLOW BUT WHATEVER -->
-   <form action="/search" method="get">
-    <input type="text" name="query"/><br />
-    <br>
-    <input type="submit" />
-  </form>
-
-</div>
-
-
-<!-- LATEST POSTS AND OR VIDEOS GOES HERE FROM INDEX.IRB -->
-
+<div class="container-login">
+  <span id="absolute-center">
+    <h1>Today's Topics</h1>
+    <% @topics.each do |topic| %>
+      <%= erb :'display_topic', locals: {topic: topic} %>
+    <% end %>
+  </span>
 </div>

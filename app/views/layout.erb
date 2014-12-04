@@ -1,32 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--
-    normalize.css removes cross-browser differences in defaults, e.g.,
-    differences in how form elements appear between Firefox and IE
-    See: http://necolas.github.com/normalize.css/
-  -->
   <link rel="stylesheet" href="/css/normalize.css">
-  <!--
-    application.css is where you put your styles
-  -->
   <link rel="stylesheet" href="/css/application.css">
-
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/js/application.js"></script>
-
-  <title>boy oh boy it's masons forum</title>
+  <title>boy oh boy it's mason's forum</title>
 </head>
 <body>
-  <p><% if current_user %>
-    welcome back <%=current_user.alias %><br>
-      <a href="topic/new">make a post</a><br>
-        <a href="/logout">logout</a><br>
+  <h3><% if current_user %>
+    welcome back, <%=current_user.alias %>!<br>
+        <a href="/topic/new">Make a New Topic!</a><br>
+        <a href="/">Browse Current Threads</a><br>
+        <a href="/logout">Logout</a><br>
       <% else %>
         <a href="/signup">signup</a> or
         <a href="/login">login</a> if you already have an account
       <% end %>
-  </p>
+  </h3>
   <%= yield %>
 </body>
 </html>

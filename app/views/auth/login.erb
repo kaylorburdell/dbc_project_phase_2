@@ -1,17 +1,17 @@
-<div class="container">
-<h1>login</h1>
-<p>
-    <% if current_user %>
+<div class="container-login">
+  <span id="absolute-center">
+    <h1>Login</h1>
+      <% if current_user %>
         <a href="/logout">logout</a>
       <% else %>
-      <%= display_error %>
+        <%= display_error %>
         <form action="/login" method="POST">
-          Username: <br>
-          <input type="text" name="alias">
-          <br>Password: <br>
-         <input type="password" name="password">
-         <input type="submit">
-        </form>
+        <h2>Username: <br>
+        <input type="text" name="alias">
+        <br>Password:<br>
+        <input type="password" name="password">
+        <input type="submit">
+        </form></h2>
       <% end %>
-      <a href = "/">back home</a>
-</p>
+    <a href = "/">back home</a>
+</div>

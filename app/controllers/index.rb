@@ -3,7 +3,8 @@ configure do
 end
 
 get '/' do
-  # @forums = Forum.all
+  @topic  = Topic.all
+  @topics = @topic.order("updated_at")
   erb :index
 end
 
@@ -15,12 +16,9 @@ get '/topic/new' do
   end
 end
 
-# get '/topics/:id' do |id|
-#   erb :'/topic', locals: {topic: @topic}
-# end
-
 get '/topic/:id' do
   @topic = Topic.find(params[:id])
+  @posts = @topic.posts.order("updated_at")
   erb :topic
 end
 
@@ -31,12 +29,11 @@ post '/topic/:id' do
   @post.user = current_user
   @post.topic_id = @topic.id
   @post.save
+  redirect("/topic/#{@topic.id}")
 
 end
 
 post '/topic', auth: :user do
-  # puts '*' * 300
-  # puts params
   params[:topic][:user_id] = current_user.id
   @topic = Topic.create(params[:topic])
   if @topic.save
@@ -57,42 +54,29 @@ put '/post' do
   redirect("/topic/#{@topic.id}")
 end
 
-put '/post/:id' do |id|
-  wiki = Wiki.find(id)
-  if wiki.update(params[:wiki])
-    wiki.create_revision(params[:revision][:content], current_user)
-    redirect("/wiki/#{wiki.id}")
-  else
-    session[:error] = wiki.errors.messages
-    redirect("/wiki/#{wiki.id}/edit")
-  end
-end
-
 post '/post' do
   if current_user
     @topic = Topic.find(params[:id])
     params[:post][:user_id] = current_user.id
     params[:post][:parent_id] = @topic.id
-  @post = Post.create(params[:post])
+  @post = Post.new(params[:post])
     if @post.save
-      # ALL THIS IS MESSED UP
       redirect("/topic/#{@topic.id}")
-      # erb :'/topic', locals: {topic: @topic}
     else
       session[:error] = post.errors.messages
       redirect("../")
     end
-  else
   end
 end
 
 delete '/topic/:id', auth: :user do |id|
+  @topic = Topic.find(params[:id])
   @topic.destroy
-
   if request.xhr?
     return {deleted: true}.to_json
+
   else
-    redirect to('/topics')
+    redirect('/')
   end
 end
 
@@ -103,17 +87,12 @@ get '/topic/:id/edit', auth: :user do |id|
 end
 
 put '/topic/:id', auth: :user do |id|
+  p 'hello'
   @topic = Topic.find(params[:id])
   if current_user.may_edit(@topic)
     @topic.update(params[:topic])
-    erb :'topic'
+    redirect("/topic/#{@topic.id}")
   else
     set_error("Meek Mill - Levels")
   end
-
-  # if request.xhr?
-  #   return {topic_text: @topic.text}.to_json
-  # else
-  #   redirect to("/topic/#{id}")
-  # end
 end

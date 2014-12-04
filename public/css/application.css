@@ -1,10 +1,94 @@
 .container {
+  width: 75%;
+  height: 100%;
+  min-width: 400px;
+  padding: 20px 20px 20px 20px;
+  border: 2px solid black;
+  border-radius: 9px;
+  background: linear-gradient(to bottom, rgba(255,255,255,.01), rgba(0,0,0,.1));
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container-login {
   margin: 20px auto;
-  width: 600px;
-  padding: 0px 20px 20px 20px;
-  border: 1px dotted black;
+  width: 30%;
+  height: 40%;
+  min-width: 400px;
+  min-height: 400px;
+  padding: 10px 0px 10px 0px;
+  border: 2px solid black;
+  border-radius: 9px;
+  background: linear-gradient(to bottom, rgba(255,255,255,.01), rgba(0,0,0,.1));
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.topic {
+  background-color: teal;
+
+
 }
 
 th {
   text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: bold;
+  line-height: 1.25;
+  margin-top: 1em;
+  margin-bottom: .5em;
+}
+
+h1,
+.h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+h2,
+.h2 {
+  font-size: 1.5rem;
+}
+
+h3,
+.h3 {
+  font-size: 1.25rem;
+  margin: 4px;
+}
+
+h4,
+.h4 {
+  font-size: 1rem;
+}
+
+h5,
+.h5 {
+  font-size: .875rem;
+  text-align: center;
+}
+
+h6,
+.h6 {
+  font-size: .75rem;
+}
+
+#absolute-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
